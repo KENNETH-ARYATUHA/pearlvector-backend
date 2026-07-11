@@ -15,7 +15,13 @@ const blogRoutes = require("./routes/blog");
 const contactRoutes = require("./routes/contact");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://pearl-vector-website-five.vercel.app", // your live frontend
+  ],
+}));
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
