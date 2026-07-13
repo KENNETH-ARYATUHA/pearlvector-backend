@@ -35,10 +35,13 @@ router.post("/", requireAuth, upload.single("image"), (req, res) => {
   });
 });
 
-// Delete an image by its Cloudinary public_id.
-router.delete("/:public_id", requireAuth, async (req, res) => {
+// Delete an image by its Cloudinary public_id. Using a wildcard because
+// Cloudinary public_ids include a folder path with a slash in it
+// (e.g. "pearlvector/abc123"), which a normal :param can't capture.
+router.delete("/*", requireAuth, async (req, res) => {
+  const publicId = req.params[0]; // everything after /upload/
   try {
-    await cloudinary.uploader.destroy(`pearlvector/${req.params.public_id}`);
+    await cloudinary.uploader.destroy(publicId);
     res.json({ success: true });
   } catch (err) {
     console.error(err);
