@@ -20,6 +20,8 @@ app.use(cors({
     "http://localhost:5173",
     "http://localhost:5174",
     "https://pearl-vector-website-five.vercel.app", 
+    "www.pearlvector.com",
+    "https://www.pearlvector.com",
     "https://pearlvector-admin.vercel.app"  // your live frontend
   ],
 }));
